@@ -121,4 +121,21 @@ export class RecipeDetailsPage {
   isFavorite(): boolean {
     return this.recipe ? this.favoritesService.isFavorite(this.recipe.id) : false;
   }
+
+  getNumberedInstructions(): string[] {
+    if (!this.recipe?.instructions) {
+      return [];
+    }
+
+    // Remove HTML tags
+    const text = this.recipe.instructions.replace(/<[^>]*>/g, '');
+    
+    // Split by common delimiters (periods followed by space/newline, or numbered lists)
+    const steps = text
+      .split(/\d+\.\s+|\.\s+(?=[A-Z])/)
+      .map(s => s.trim())
+      .filter(s => s.length > 10); // Filter out very short fragments
+
+    return steps;
+  }
 }

@@ -21,6 +21,7 @@
 
   <div *ngIf="!loading && recipe">
     <h2>{{ recipe.title }}</h2>
+    <p style="color: #666; font-size: 14px; margin-top: -8px;">Recipe ID: {{ recipe.id }}</p>
     <img [src]="recipe.image" [alt]="recipe.title" style="width: 100%; border-radius: 12px;" />
 
     <div *ngIf="recipe.extendedIngredients?.length">
@@ -50,7 +51,11 @@
 
     <div *ngIf="recipe.instructions">
       <h3>Instructions</h3>
-      <div [innerHTML]="recipe.instructions"></div>
+      <ol style="padding-left: 20px; line-height: 1.8;">
+        <li *ngFor="let step of getNumberedInstructions()" style="margin-bottom: 12px;">
+          {{ step }}
+        </li>
+      </ol>
     </div>
   </div>
 </ion-content>

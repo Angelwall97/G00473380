@@ -16,6 +16,8 @@ import {
 } from '@ionic/angular/standalone';
 import { FavoritesService } from '../services/favorites.service';
 import { RecipeCard } from '../services/spoonacular.service';
+import { addIcons } from 'ionicons';
+import { heartOutline, heartDislike, arrowBack } from 'ionicons/icons';
 
 @Component({
   selector: 'app-favorites',
@@ -41,7 +43,9 @@ import { RecipeCard } from '../services/spoonacular.service';
 export class FavoritesPage implements OnInit {
   favorites: RecipeCard[] = [];
 
-  constructor(private favoritesService: FavoritesService) {}
+  constructor(private favoritesService: FavoritesService) {
+    addIcons({ heartOutline, heartDislike, arrowBack });
+  }
 
   ngOnInit() {
     this.loadFavorites();
