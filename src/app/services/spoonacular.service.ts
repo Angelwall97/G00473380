@@ -17,7 +17,27 @@ export interface RecipeInfo {
   servings?: number;
   summary?: string;
   instructions?: string;
-  extendedIngredients?: Array<{ original: string }>;
+  extendedIngredients?: Array<{
+    original: string;
+    measures?: {
+      us?: {
+        amount: number;
+        unitShort: string;
+        unitLong: string;
+      };
+      metric?: {
+        amount: number;
+        unitShort: string;
+        unitLong: string;
+      };
+    };
+  }>;
+  analyzedInstructions?: Array<{
+    steps: Array<{
+      number: number;
+      step: string;
+    }>;
+  }>;
 }
 
 @Injectable({ providedIn: 'root' })

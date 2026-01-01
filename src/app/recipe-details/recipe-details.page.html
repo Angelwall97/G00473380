@@ -19,9 +19,21 @@
 
     <div *ngIf="recipe.extendedIngredients?.length">
       <h3>Ingredients</h3>
+      
+      <ion-segment [(ngModel)]="measurementSystem" class="ion-margin-bottom">
+        <ion-segment-button value="us">
+          <ion-label>US</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="metric">
+          <ion-label>Metric</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+
       <ion-list>
         <ion-item *ngFor="let ing of recipe.extendedIngredients">
-          <ion-label>{{ ing.original }}</ion-label>
+          <ion-label class="ion-text-wrap">
+            {{ getIngredientText(ing) }}
+          </ion-label>
         </ion-item>
       </ion-list>
     </div>
