@@ -1,0 +1,12 @@
+Student Number: G00473380
+GitHub Repository: https://github.com/Angelwall97/G00473380
+
+Project: Recipe Finder Mobile Application
+Course: Mobile Applications Development
+Higher Diploma in Science – Computing (Software Development)
+
+Repository URL: https://github.com/Angelwall97/G00473380
+Repository is publicly accessible.
+
+This repository contains the complete source code for the Recipe Finder application
+developed using Ionic Framework, Angular, and the Spoonacular API.
