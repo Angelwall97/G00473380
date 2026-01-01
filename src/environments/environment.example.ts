@@ -4,6 +4,6 @@
 
 export const environment = {
   production: false,
-  spoonacularApiKey: '70759a4f7911402abcc53d3c51d3b759',
+  spoonacularApiKey: 'YOUR_API_KEY_HERE',
 };
 

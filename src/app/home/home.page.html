@@ -1,20 +1,32 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>G00473380</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="stacked">Enter Ingredients</ion-label>
+    <ion-input placeholder="carrots, beef, potatoes" [(ngModel)]="ingredients"></ion-input>
+  </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-button expand="block" class="ion-margin-top" (click)="search()">
+    SEARCH
+  </ion-button>
+
+  <ion-text color="danger" *ngIf="errorMsg">
+    <p class="ion-margin-top">{{ errorMsg }}</p>
+  </ion-text>
+
+  <ion-spinner *ngIf="loading" class="ion-margin-top"></ion-spinner>
+
+  <ion-card *ngFor="let r of recipes" class="ion-margin-top">
+    <img [src]="r.image" [alt]="r.title" />
+    <ion-card-header>
+      <ion-card-title>{{ r.title }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button size="small" [routerLink]="['/recipe-details', r.id]">DETAILS</ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
