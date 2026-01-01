@@ -18,9 +18,13 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonCardContent,
+  IonIcon,
 } from '@ionic/angular/standalone';
 
 import { SpoonacularService, RecipeCard } from '../services/spoonacular.service';
+import { FavoritesService } from '../services/favorites.service';
+import { addIcons } from 'ionicons';
+import { heart, heartOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
@@ -45,6 +49,7 @@ import { SpoonacularService, RecipeCard } from '../services/spoonacular.service'
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
+    IonIcon,
   ],
 })
 export class HomePage {
@@ -53,7 +58,12 @@ export class HomePage {
   loading = false;
   errorMsg = '';
 
-  constructor(private api: SpoonacularService) {}
+  constructor(
+    private api: SpoonacularService,
+    private favoritesService: FavoritesService
+  ) {
+    addIcons({ heart, heartOutline });
+  }
 
   search() {
     console.log('🔍 Search button clicked!');
@@ -94,5 +104,13 @@ export class HomePage {
         this.errorMsg = 'Spoonacular request failed (check console).';
       },
     });
+  }
+
+  toggleFavorite(recipe: RecipeCard) {
+    this.favoritesService.toggleFavorite(recipe);
+  }
+
+  isFavorite(id: number): boolean {
+    return this.favoritesService.isFavorite(id);
   }
 }

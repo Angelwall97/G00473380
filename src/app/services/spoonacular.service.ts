@@ -19,6 +19,8 @@ export interface RecipeInfo {
   instructions?: string;
   extendedIngredients?: Array<{
     original: string;
+    name?: string;
+    image?: string;
     measures?: {
       us?: {
         amount: number;

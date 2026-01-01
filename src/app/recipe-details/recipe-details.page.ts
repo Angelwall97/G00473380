@@ -16,9 +16,13 @@ import {
   IonLabel,
   IonSegment,
   IonSegmentButton,
+  IonIcon,
 } from '@ionic/angular/standalone';
 
-import { SpoonacularService, RecipeInfo } from '../services/spoonacular.service';
+import { SpoonacularService, RecipeInfo, RecipeCard } from '../services/spoonacular.service';
+import { FavoritesService } from '../services/favorites.service';
+import { addIcons } from 'ionicons';
+import { heart, heartOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-recipe-details',
@@ -40,6 +44,7 @@ import { SpoonacularService, RecipeInfo } from '../services/spoonacular.service'
     IonLabel,
     IonSegment,
     IonSegmentButton,
+    IonIcon,
   ],
 })
 export class RecipeDetailsPage {
@@ -48,7 +53,13 @@ export class RecipeDetailsPage {
   recipe?: RecipeInfo;
   measurementSystem: string = 'us';
 
-  constructor(private route: ActivatedRoute, private api: SpoonacularService) {
+  constructor(
+    private route: ActivatedRoute,
+    private api: SpoonacularService,
+    private favoritesService: FavoritesService
+  ) {
+    addIcons({ heart, heartOutline });
+    
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     if (!id) {
@@ -94,5 +105,20 @@ export class RecipeDetailsPage {
       }
       return ingredient.original;
     }
+  }
+
+  toggleFavorite() {
+    if (this.recipe) {
+      const recipeCard: RecipeCard = {
+        id: this.recipe.id,
+        title: this.recipe.title,
+        image: this.recipe.image,
+      };
+      this.favoritesService.toggleFavorite(recipeCard);
+    }
+  }
+
+  isFavorite(): boolean {
+    return this.recipe ? this.favoritesService.isFavorite(this.recipe.id) : false;
   }
 }

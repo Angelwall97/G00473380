@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button routerLink="/home">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Favorites</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="favorites.length === 0" class="empty-state">
+    <ion-icon name="heart-outline" class="empty-icon"></ion-icon>
+    <h2>No Favorites Yet</h2>
+    <p>Add recipes to your favorites by clicking the heart icon</p>
+    <ion-button routerLink="/home">Browse Recipes</ion-button>
+  </div>
+
+  <ion-card *ngFor="let recipe of favorites" class="ion-margin-top" button="true" [routerLink]="['/recipe-details', recipe.id]">
+    <img [src]="recipe.image" [alt]="recipe.title" />
+    <ion-card-header>
+      <ion-card-title>{{ recipe.title }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-button size="small" fill="outline" color="danger" (click)="removeFavorite($event, recipe.id)">
+        <ion-icon slot="start" name="heart-dislike"></ion-icon>
+        Remove
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

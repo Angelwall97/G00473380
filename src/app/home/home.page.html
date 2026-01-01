@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>G00473380</ion-title>
+    <ion-button slot="end" fill="clear" routerLink="/favorites">
+      <ion-icon name="heart" color="danger"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -26,7 +29,18 @@
       <ion-card-title>{{ r.title }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-button size="small" [routerLink]="['/recipe-details', r.id]">DETAILS</ion-button>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <ion-button size="small" [routerLink]="['/recipe-details', r.id]">DETAILS</ion-button>
+        <ion-button 
+          size="small" 
+          fill="clear" 
+          (click)="toggleFavorite(r)">
+          <ion-icon 
+            [name]="isFavorite(r.id) ? 'heart' : 'heart-outline'" 
+            [color]="isFavorite(r.id) ? 'danger' : 'medium'">
+          </ion-icon>
+        </ion-button>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>

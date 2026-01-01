@@ -1,6 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Recipe Details</ion-title>
+    <ion-button slot="end" fill="clear" (click)="toggleFavorite()">
+      <ion-icon 
+        [name]="isFavorite() ? 'heart' : 'heart-outline'" 
+        [color]="isFavorite() ? 'danger' : 'medium'">
+      </ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -31,6 +37,10 @@
 
       <ion-list>
         <ion-item *ngFor="let ing of recipe.extendedIngredients">
+          <img *ngIf="ing.image" [src]="'https://spoonacular.com/cdn/ingredients_100x100/' + ing.image" 
+               [alt]="ing.name" 
+               slot="start" 
+               style="width: 60px; height: 60px; border-radius: 8px; margin-right: 12px;" />
           <ion-label class="ion-text-wrap">
             {{ getIngredientText(ing) }}
           </ion-label>
